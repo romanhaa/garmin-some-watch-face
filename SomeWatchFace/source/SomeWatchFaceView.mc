@@ -184,8 +184,12 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         var viewFeelsLikeTemp = View.findDrawableById("FeelsLikeTempLabel") as Text;
         var forecast = Weather.getCurrentConditions();
         var temperature = forecast.feelsLikeTemperature;
-        var temperatureString = Lang.format("$1$°", [temperature]);
-        viewFeelsLikeTemp.setText(temperatureString);
+        if (temperature == null) {
+            viewFeelsLikeTemp.setText("--");
+        } else {
+            var temperatureString = Lang.format("$1$°", [temperature]);
+            viewFeelsLikeTemp.setText(temperatureString);
+        }
 
         // var lastUpdatedLabel = View.findDrawableById("FeelsLikeTempLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
@@ -241,12 +245,19 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         var heartRate = Activity.getActivityInfo().currentHeartRate;
         var HRH = ActivityMonitor.getHeartRateHistory(1, true);
         var HRS = HRH.next();
-        if( HRS != null && HRS.heartRate != ActivityMonitor.INVALID_HR_SAMPLE ) {
+        if (
+            HRS != null
+            && HRS.heartRate != ActivityMonitor.INVALID_HR_SAMPLE
+        ) {
             heartRate = HRS.heartRate;
         }
-        var string = Lang.format("$1$", [heartRate]);
         var viewLabel = View.findDrawableById("CurrentHeartRateLabel") as Text;
-        viewLabel.setText(string);
+        if (heartRate == null) {
+            viewLabel.setText("--");
+        } else {
+            var string = Lang.format("$1$", [heartRate]);
+            viewLabel.setText(string);
+        }
 
         // var lastUpdatedLabel = View.findDrawableById("CurrentHeartRateLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
