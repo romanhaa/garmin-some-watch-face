@@ -2,16 +2,10 @@
     <label id="FeelsLikeTempLabel" x="90" y="8" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
     <label id="DailyLowHighTempLabel" x="95" y="8" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
     <label id="DateLabel" x="center" y="25" font="Graphics.FONT_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
-    <label id="TimeLabel" x="center" y="43" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
-    <label id="SunriseSunsetLabel" x="80" y="125" font="Graphics.FONT_SYSTEM_SMALL" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_YELLOW" />
-    <label id="StepsLabel" x="128" y="125" font="Graphics.FONT_SYSTEM_SMALL" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_BLUE" />
-    <label id="CurrentHeartRateLabel" x="80" y="147" font="Graphics.FONT_SYSTEM_SMALL" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_DK_RED" />
-    <label id="ActiveMinutesLabel" x="128" y="147" font="Graphics.FONT_SYSTEM_SMALL" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_DK_GREEN" />
-    <!-- <label id="FeelsLikeTempLastUpdatedLabel" x="center" y="40" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" /> -->
-    <!-- <label id="DailyLowHighTempLastUpdatedLabel" x="center" y="60" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" /> -->
-    <!-- <label id="StepsLastUpdatedLabel" x="center" y="80" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" /> -->
-    <!-- <label id="ActiveMinutesLastUpdatedLabel" x="center" y="100" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" /> -->
-    <!-- <label id="CurrentHeartRateLastUpdatedLabel" x="center" y="120" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" /> -->
-    <!-- <label id="SunriseSunsetLastUpdatedLabel" x="center" y="140" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" /> -->
-    <label id="BatteryLabel" x="center" y="175" font="Graphics.FONT_SYSTEM_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
+    <label id="TimeLabel" x="center" y="44" font="@Fonts.robotoFont90" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
+    <label id="SunriseSunsetLabel" x="78" y="120" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_YELLOW" />
+    <label id="StepsLabel" x="130" y="120" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_BLUE" />
+    <label id="CurrentHeartRateLabel" x="78" y="146" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_DK_RED" />
+    <label id="ActiveMinutesLabel" x="130" y="146" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_DK_GREEN" />
+    <label id="BatteryLabel" x="center" y="175" font="@Fonts.robotoFont27" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
 </layout>

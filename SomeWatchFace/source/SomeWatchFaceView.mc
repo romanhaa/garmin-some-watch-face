@@ -131,13 +131,13 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
 
         // Draw icons.
         dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_BLACK);
-        dc.drawText(100, 125, iconsFont, "q", Graphics.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(100, 121, iconsFont, "q", Graphics.TEXT_JUSTIFY_RIGHT);
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
-        dc.drawText(108, 125, iconsFont, "\u00C4", Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(108, 121, iconsFont, "\u00C4", Graphics.TEXT_JUSTIFY_LEFT);
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
-        dc.drawText(100, 147, iconsFont, "m", Graphics.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(100, 148, iconsFont, "m", Graphics.TEXT_JUSTIFY_RIGHT);
         dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_BLACK);
-        dc.drawText(108, 147, iconsFont, "X", Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(108, 148, iconsFont, "X", Graphics.TEXT_JUSTIFY_LEFT);
         //
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
         if (numberOfAlarms >= 1 && doNotDisturb) {

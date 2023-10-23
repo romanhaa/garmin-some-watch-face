@@ -1,3 +1,6 @@
 <fonts>
   <font id="iconFont" filename="icons.fnt" />
+  <font id="robotoFont27" filename="roboto-27.fnt" />
+  <font id="robotoFont29" filename="roboto-29.fnt" />
+  <font id="robotoFont90" filename="roboto-90.fnt" />
 </fonts>
