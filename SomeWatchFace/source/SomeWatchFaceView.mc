@@ -56,7 +56,7 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
     function onUpdate(dc as Dc) as Void {
 
         var nowAsMoment = new Time.Moment(Time.now().value());
-        System.println(nowAsMoment.value());
+        // System.println(nowAsMoment.value());
 
         // Get and show the current time
         // NOTE Time updates every second even though only hours and minutes are
@@ -69,43 +69,43 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
 
         // Update date.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedDate, intervalUpdateDate)) {
-            System.println("setting date because reference time was null or because it's time to do so");
+            // System.println("setting date because reference time was null or because it's time to do so");
             self.updateDate(clockTime, nowAsMoment);
         }
 
         // Update feels like temperature.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedFeelsLikeTemp, intervalUpdateFeelsLikeTemp)) {
-            System.println("setting feels like temp because reference time was null or because it's time to do so");
+            // System.println("setting feels like temp because reference time was null or because it's time to do so");
             self.updateFeelsLikeTemp(clockTime, nowAsMoment);
         }
 
         // Update daily low/high temperature.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedDailyLowHighTemp, intervalUpdateDailyLowHighTemp)) {
-            System.println("setting daily low/high temp because reference time was null or because it's time to do so");
+            // System.println("setting daily low/high temp because reference time was null or because it's time to do so");
             self.updateDailyLowHighTemp(clockTime, nowAsMoment);
         }
 
         // Update (daily) step count.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedSteps, intervalUpdateSteps)) {
-            System.println("setting steps because reference time was null or because it's time to do so");
+            // System.println("setting steps because reference time was null or because it's time to do so");
             self.updateSteps(clockTime, nowAsMoment);
         }
 
         // Update (weekly) active minutes.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedActiveMinutes, intervalUpdateActiveMinutes)) {
-            System.println("setting active minutes because reference time was null or because it's time to do so");
+            // System.println("setting active minutes because reference time was null or because it's time to do so");
             self.updateActiveMinutes(clockTime, nowAsMoment);
         }
 
         // Update current heart rate.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedCurrentHeartRate, intervalUpdateCurrentHeartRate)) {
-            System.println("setting current heart rate because reference time was null or because it's time to do so");
+            // System.println("setting current heart rate because reference time was null or because it's time to do so");
             self.updateCurrentHeartRate(clockTime, nowAsMoment);
         }
 
         // Update sunrise and sunset.
         if (nextUpdateSunriseSunset == null || nowAsMoment.greaterThan(nextUpdateSunriseSunset)) {
-            System.println("setting sunrise/sunset because reference time was null or because it's time to do so");
+            // System.println("setting sunrise/sunset because reference time was null or because it's time to do so");
             self.updateSunriseSunset(clockTime, nowAsMoment);
         }
 
@@ -122,7 +122,7 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
 
         // Update battery.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedBattery, intervalUpdateBattery)) {
-            System.println("setting battery because reference time was null or because it's time to do so");
+            // System.println("setting battery because reference time was null or because it's time to do so");
             self.updateBattery(clockTime, nowAsMoment, batteryJustification);
         }
 
@@ -277,15 +277,15 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
                 var info;
                 if (now.lessThan(sunrise)) {
                     info = Time.Gregorian.info(sunrise, Time.FORMAT_SHORT);
-                    System.println("next event: sunrise");
+                    // System.println("next event: sunrise");
                     nextUpdateSunriseSunset = sunrise;
                 } else if (now.greaterThan(sunrise) && now.lessThan(sunset)) {
                     info = Time.Gregorian.info(sunset, Time.FORMAT_SHORT);
-                    System.println("next event: sunset");
+                    // System.println("next event: sunset");
                     nextUpdateSunriseSunset = sunset;
                 } else {
                     info = Time.Gregorian.info(sunrise, Time.FORMAT_SHORT);
-                    System.println("next event: sunrise (tomorrow)");
+                    // System.println("next event: sunrise (tomorrow)");
                     var oneDay = new Time.Duration(Gregorian.SECONDS_PER_DAY);
                     var tomorrow = today.add(oneDay);
                     nextUpdateSunriseSunset = Weather.getSunrise(location, tomorrow);
