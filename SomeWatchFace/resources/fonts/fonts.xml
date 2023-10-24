@@ -3,7 +3,7 @@
   <font id="iconFont25" filename="icons-25.fnt" />
   <!-- <font id="robotoFont27" filename="roboto-27.fnt" /> -->
   <!-- <font id="robotoFont29" filename="roboto-29.fnt" /> -->
-  <font id="robotoCondensedFont27" filename="robotoCondensed-27.fnt" />
-  <font id="robotoCondensedFont29" filename="robotoCondensed-29.fnt" />
-  <font id="robotoFont90" filename="roboto-90.fnt" />
+  <font id="robotoCondensedMediumFont27" filename="robotoCondensedMedium-27.fnt" />
+  <font id="robotoCondensedMediumFont29" filename="robotoCondensedMedium-29.fnt" />
+  <font id="robotoMediumFont90" filename="robotoMedium-90.fnt" />
 </fonts>
