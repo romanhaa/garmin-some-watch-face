@@ -3,9 +3,16 @@
     <label id="DailyLowHighTempLabel" x="95" y="8" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
     <label id="DateLabel" x="center" y="25" font="Graphics.FONT_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
     <label id="TimeLabel" x="center" y="44" font="@Fonts.robotoFont90" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
-    <label id="SunriseSunsetLabel" x="78" y="120" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_YELLOW" />
-    <label id="StepsLabel" x="130" y="120" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_BLUE" />
-    <label id="CurrentHeartRateLabel" x="78" y="146" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_DK_RED" />
-    <label id="ActiveMinutesLabel" x="130" y="146" font="@Fonts.robotoFont29" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_DK_GREEN" />
-    <label id="BatteryLabel" x="center" y="175" font="@Fonts.robotoFont27" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
+    <label id="SunriseSunsetLabel" x="78" y="120" font="@Fonts.robotoCondensedFont29" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_YELLOW" />
+    <label id="SunriseSunsetIcon" text="q" x="100" y="120" font="@Fonts.iconFont25" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_YELLOW" />
+    <label id="StepsLabel" x="130" y="120" font="@Fonts.robotoCondensedFont29" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_BLUE" />
+    <label id="StepsIcon" text="\u00C4" x="108" y="120" font="@Fonts.iconFont25" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_BLUE" />
+    <label id="CurrentHeartRateLabel" x="78" y="146" font="@Fonts.robotoCondensedFont29" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_DK_RED" />
+    <label id="CurrentHeartRateIcon" text="m" x="100" y="146" font="@Fonts.iconFont25" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_DK_RED" />
+    <label id="ActiveMinutesLabel" x="130" y="146" font="@Fonts.robotoCondensedFont29" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_DK_GREEN" />
+    <label id="ActiveMinutesIcon" text="X" x="108" y="146" font="@Fonts.iconFont25" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_DK_GREEN" />
+    <label id="BatteryLabel" x="center" y="175" font="@Fonts.robotoCondensedFont27" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
+    <label id="SingleIcon" x="110" y="174" font="@Fonts.iconFont25" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+    <label id="DoubleIcon1" x="110" y="174" font="@Fonts.iconFont25" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+    <label id="DoubleIcon2" x="130" y="174" font="@Fonts.iconFont25" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
 </layout>

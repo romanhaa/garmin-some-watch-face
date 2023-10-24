@@ -1,6 +1,9 @@
 <fonts>
-  <font id="iconFont" filename="icons.fnt" />
-  <font id="robotoFont27" filename="roboto-27.fnt" />
-  <font id="robotoFont29" filename="roboto-29.fnt" />
+  <!-- <font id="iconFont22" filename="icons-22.fnt" /> -->
+  <font id="iconFont25" filename="icons-25.fnt" />
+  <!-- <font id="robotoFont27" filename="roboto-27.fnt" /> -->
+  <!-- <font id="robotoFont29" filename="roboto-29.fnt" /> -->
+  <font id="robotoCondensedFont27" filename="robotoCondensed-27.fnt" />
+  <font id="robotoCondensedFont29" filename="robotoCondensed-29.fnt" />
   <font id="robotoFont90" filename="roboto-90.fnt" />
 </fonts>

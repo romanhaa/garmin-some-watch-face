@@ -7,8 +7,6 @@ import Toybox.Weather;
 
 class SomeWatchFaceView extends WatchUi.WatchFace {
 
-    var iconsFont = null;
-
     const MINUTE = 60;
     const HOUR = self.MINUTE * 60;
 
@@ -43,7 +41,6 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
     // Load your resources here
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.WatchFace(dc));
-        iconsFont = WatchUi.loadResource(Rez.Fonts.iconFont);
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -109,45 +106,44 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
             self.updateSunriseSunset(clockTime, nowAsMoment);
         }
 
-        var deviceSettings = System.getDeviceSettings();
-        var numberOfAlarms = deviceSettings.alarmCount;
-        var doNotDisturb = deviceSettings.doNotDisturb;
-
-        var batteryJustification;
-        if (numberOfAlarms >= 1 || doNotDisturb) {
-            batteryJustification = Graphics.TEXT_JUSTIFY_RIGHT;
-        } else {
-            batteryJustification = Graphics.TEXT_JUSTIFY_CENTER;
-        }
-
         // Update battery.
         if (self.shouldUpdate(nowAsMoment, lastUpdatedBattery, intervalUpdateBattery)) {
             // System.println("setting battery because reference time was null or because it's time to do so");
-            self.updateBattery(clockTime, nowAsMoment, batteryJustification);
+            self.updateBattery(clockTime, nowAsMoment);
+        }
+
+        // Manage content of last row.
+        var deviceSettings = System.getDeviceSettings();
+        var numberOfAlarms = deviceSettings.alarmCount;
+        var doNotDisturb = deviceSettings.doNotDisturb;
+        var batteryLabel = View.findDrawableById("BatteryLabel") as Text;
+        var singleIcon = View.findDrawableById("SingleIcon") as Text;
+        var doubleIcon1 = View.findDrawableById("DoubleIcon1") as Text;
+        var doubleIcon2 = View.findDrawableById("DoubleIcon2") as Text;
+        if (numberOfAlarms >= 1 && doNotDisturb) {
+            batteryLabel.setJustification(Graphics.TEXT_JUSTIFY_RIGHT);
+            singleIcon.setText("");
+            doubleIcon1.setText("R");
+            doubleIcon2.setText("c");
+        } else if (numberOfAlarms >= 1 && !doNotDisturb) {
+            batteryLabel.setJustification(Graphics.TEXT_JUSTIFY_RIGHT);
+            singleIcon.setText("R");
+            doubleIcon1.setText("");
+            doubleIcon2.setText("");
+        } else if (numberOfAlarms == 0 && doNotDisturb) {
+            batteryLabel.setJustification(Graphics.TEXT_JUSTIFY_RIGHT);
+            singleIcon.setText("c");
+            doubleIcon1.setText("");
+            doubleIcon2.setText("");
+        } else {
+            batteryLabel.setJustification(Graphics.TEXT_JUSTIFY_CENTER);
+            singleIcon.setText("");
+            doubleIcon1.setText("");
+            doubleIcon2.setText("");
         }
 
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-
-        // Draw icons.
-        dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_BLACK);
-        dc.drawText(100, 121, iconsFont, "q", Graphics.TEXT_JUSTIFY_RIGHT);
-        dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_BLACK);
-        dc.drawText(108, 121, iconsFont, "\u00C4", Graphics.TEXT_JUSTIFY_LEFT);
-        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
-        dc.drawText(100, 148, iconsFont, "m", Graphics.TEXT_JUSTIFY_RIGHT);
-        dc.setColor(Graphics.COLOR_GREEN, Graphics.COLOR_BLACK);
-        dc.drawText(108, 148, iconsFont, "X", Graphics.TEXT_JUSTIFY_LEFT);
-        //
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
-        if (numberOfAlarms >= 1 && doNotDisturb) {
-            dc.drawText(110, 175, iconsFont, "R", Graphics.TEXT_JUSTIFY_LEFT);
-            dc.drawText(128, 175, iconsFont, "c", Graphics.TEXT_JUSTIFY_LEFT);
-        } else if (numberOfAlarms >= 1 && !doNotDisturb) {
-            dc.drawText(110, 175, iconsFont, "R", Graphics.TEXT_JUSTIFY_LEFT);
-        } else if (numberOfAlarms == 0 && doNotDisturb) {
-            dc.drawText(110, 175, iconsFont, "c", Graphics.TEXT_JUSTIFY_LEFT);
-        }
     }
 
     // Called when this View is removed from the screen. Save the
@@ -306,15 +302,10 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         // self.lastUpdatedSunriseSunset = now;
     }
 
-    function updateBattery(
-        clockTime as ClockTime,
-        now as Time.Moment,
-        justification as Graphics.TextJustification
-    ) as Void {
+    function updateBattery(clockTime as ClockTime, now as Time.Moment) as Void {
         var string = Lang.format("$1$%", [System.getSystemStats().battery.toNumber()]);
         var view = View.findDrawableById("BatteryLabel") as Text;
         view.setText(string);
-        view.setJustification(justification);
 
         self.lastUpdatedBattery = now;
     }
