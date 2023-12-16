@@ -239,14 +239,14 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
     function updateCurrentHeartRate(clockTime as ClockTime, now as Time.Moment) as Void {
         // var currentHeartRateString = Lang.format("$1$", [Activity.getActivityInfo().currentHeartRate]);
         var heartRate = Activity.getActivityInfo().currentHeartRate;
-        var HRH = ActivityMonitor.getHeartRateHistory(1, true);
-        var HRS = HRH.next();
-        if (
-            HRS != null
-            && HRS.heartRate != ActivityMonitor.INVALID_HR_SAMPLE
-        ) {
-            heartRate = HRS.heartRate;
-        }
+        // var HRH = ActivityMonitor.getHeartRateHistory(1, true);
+        // var HRS = HRH.next();
+        // if (
+        //     HRS != null
+        //     && HRS.heartRate != ActivityMonitor.INVALID_HR_SAMPLE
+        // ) {
+        //     heartRate = HRS.heartRate;
+        // }
         var viewLabel = View.findDrawableById("CurrentHeartRateLabel") as Text;
         if (heartRate == null) {
             viewLabel.setText("--");
