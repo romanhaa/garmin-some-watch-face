@@ -187,46 +187,43 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         var temperature = forecast.feelsLikeTemperature;
         if (temperature == null) {
             viewFeelsLikeTemp.setText("--");
-        } else {
-            var temperatureString = Lang.format("$1$°", [temperature]);
-            viewFeelsLikeTemp.setText(temperatureString);
+            self.lastUpdatedFeelsLikeTemp = new Time.Moment(Time.now().value());
+            return;
         }
-
+        var temperatureString = Lang.format("$1$°", [temperature]);
+        viewFeelsLikeTemp.setText(temperatureString);
         // var lastUpdatedLabel = View.findDrawableById("FeelsLikeTempLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
-
         self.lastUpdatedFeelsLikeTemp = new Time.Moment(Time.now().value());
     }
 
     function updateDailyLowHighTemp(clockTime as ClockTime, now as Time.Moment) as Void {
         var viewLabel = View.findDrawableById("DailyLowHighTempLabel") as Text;
         var dailyForecast = Weather.getDailyForecast();
-        if (dailyForecast != null) {
-            var dailyLowTemp = dailyForecast[0].lowTemperature;
-            var dailyHighTemp = dailyForecast[0].highTemperature;
-            if (dailyLowTemp != null && dailyHighTemp != null) {
-                var dataString = Lang.format("$1$°|$2$°", [dailyLowTemp, dailyHighTemp]);
-                viewLabel.setText(dataString);
-            } else {
-                viewLabel.setText("no temp");
-            }
-        } else {
-            viewLabel.setText("no temp");
+        if (dailyForecast == null) {
+            viewLabel.setText("--|--");
+            self.lastUpdatedDailyLowHighTemp = now;
+            return;
         }
-
+        var dailyLowTemp = dailyForecast[0].lowTemperature;
+        var dailyHighTemp = dailyForecast[0].highTemperature;
+        if (dailyLowTemp == null || dailyHighTemp == null) {
+            viewLabel.setText("--|--");
+            self.lastUpdatedDailyLowHighTemp = now;
+            return;
+        }
+        var dataString = Lang.format("$1$°|$2$°", [dailyLowTemp, dailyHighTemp]);
+        viewLabel.setText(dataString);
         // var lastUpdatedLabel = View.findDrawableById("DailyLowHighTempLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
-
         self.lastUpdatedDailyLowHighTemp = now;
     }
 
     function updateSteps(clockTime as ClockTime, now as Time.Moment) as Void {
         var viewLabel = View.findDrawableById("StepsLabel") as Text;
         viewLabel.setText(Lang.format("$1$", [ActivityMonitor.getInfo().steps]));
-
         // var lastUpdatedLabel = View.findDrawableById("StepsLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
-
         self.lastUpdatedSteps = now;
     }
 
@@ -234,35 +231,29 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         var string = Lang.format("$1$", [ActivityMonitor.getInfo().activeMinutesWeek.total]);
         var viewLabel = View.findDrawableById("ActiveMinutesLabel") as Text;
         viewLabel.setText(string);
-
         // var lastUpdatedLabel = View.findDrawableById("ActiveMinutesLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
-
         self.lastUpdatedActiveMinutes = now;
     }
 
     function updateCurrentHeartRate(clockTime as ClockTime, now as Time.Moment) as Void {
-        // var currentHeartRateString = Lang.format("$1$", [Activity.getActivityInfo().currentHeartRate]);
-        var heartRate = Activity.getActivityInfo().currentHeartRate;
-        // var HRH = ActivityMonitor.getHeartRateHistory(1, true);
-        // var HRS = HRH.next();
-        // if (
-        //     HRS != null
-        //     && HRS.heartRate != ActivityMonitor.INVALID_HR_SAMPLE
-        // ) {
-        //     heartRate = HRS.heartRate;
-        // }
         var viewLabel = View.findDrawableById("CurrentHeartRateLabel") as Text;
+        var activityInfo = Activity.getActivityInfo();
+        if (activityInfo == null) {
+            viewLabel.setText("--");
+            self.lastUpdatedCurrentHeartRate = now;
+            return;
+        }
+        var heartRate = activityInfo.currentHeartRate;
         if (heartRate == null) {
             viewLabel.setText("--");
-        } else {
-            var string = Lang.format("$1$", [heartRate]);
-            viewLabel.setText(string);
+            self.lastUpdatedCurrentHeartRate = now;
+            return;
         }
-
+        var string = Lang.format("$1$", [heartRate]);
+        viewLabel.setText(string);
         // var lastUpdatedLabel = View.findDrawableById("CurrentHeartRateLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
-
         self.lastUpdatedCurrentHeartRate = now;
     }
 
@@ -316,7 +307,6 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         var string = Lang.format("$1$%", [System.getSystemStats().battery.toNumber()]);
         var view = View.findDrawableById("BatteryLabel") as Text;
         view.setText(string);
-
         self.lastUpdatedBattery = now;
     }
 
@@ -325,7 +315,6 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         var string = Lang.format("$1$ $2$ $3$", [info.day, info.month, info.year]);
         var view = View.findDrawableById("DateLabel") as Text;
         view.setText(string);
-
         self.lastUpdatedDate = now;
     }
 
