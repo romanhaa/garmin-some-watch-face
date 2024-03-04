@@ -179,6 +179,11 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
     function updateFeelsLikeTemp(clockTime as ClockTime, now as Time.Moment) as Void {
         var viewFeelsLikeTemp = View.findDrawableById("FeelsLikeTempLabel") as Text;
         var forecast = Weather.getCurrentConditions();
+        if (forecast == null) {
+            viewFeelsLikeTemp.setText("--");
+            self.lastUpdatedFeelsLikeTemp = new Time.Moment(Time.now().value());
+            return;
+        }
         var temperature = forecast.feelsLikeTemperature;
         if (temperature == null) {
             viewFeelsLikeTemp.setText("--");
@@ -262,43 +267,48 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
     }
 
     function updateSunriseSunset(clockTime as ClockTime, now as Time.Moment) as Void {
-        // var location = Activity.getActivityInfo().currentLocation;
-        var location = Weather.getCurrentConditions().observationLocationPosition;
-        var today = new Time.Moment(Time.today().value());
-        if (location != null && today != null) {
-            var sunrise = Weather.getSunrise(location, today);
-            var sunset = Weather.getSunset(location, today);
-            var string = "-";
-            if (sunrise != null && sunset != null) {
-                var info;
-                if (now.lessThan(sunrise)) {
-                    info = Time.Gregorian.info(sunrise, Time.FORMAT_SHORT);
-                    // System.println("next event: sunrise");
-                    nextUpdateSunriseSunset = sunrise;
-                } else if (now.greaterThan(sunrise) && now.lessThan(sunset)) {
-                    info = Time.Gregorian.info(sunset, Time.FORMAT_SHORT);
-                    // System.println("next event: sunset");
-                    nextUpdateSunriseSunset = sunset;
-                } else {
-                    info = Time.Gregorian.info(sunrise, Time.FORMAT_SHORT);
-                    // System.println("next event: sunrise (tomorrow)");
-                    var oneDay = new Time.Duration(Gregorian.SECONDS_PER_DAY);
-                    var tomorrow = today.add(oneDay);
-                    nextUpdateSunriseSunset = Weather.getSunrise(location, tomorrow);
-                }
-                string = Lang.format("$1$:$2$", [
-                    info.hour.format("%01u"),
-                    info.min.format("%02u")
-                ]);
-            }
-
-            var viewLabel = View.findDrawableById("SunriseSunsetLabel") as Text;
-            viewLabel.setText(string);
-
-            // var lastUpdatedLabel = View.findDrawableById("SunriseSunsetLastUpdatedLabel") as Text;
-            // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
+        var viewLabel = View.findDrawableById("SunriseSunsetLabel") as Text;
+        var currentConditions = Weather.getCurrentConditions();
+        if (currentConditions == null) {
+            viewLabel.setText("--");
+            return;
         }
-
+        var location = currentConditions.observationLocationPosition;
+        var today = new Time.Moment(Time.today().value());
+        if (location == null || today == null) {
+            viewLabel.setText("--");
+            return;
+        }
+        var sunrise = Weather.getSunrise(location, today);
+        var sunset = Weather.getSunset(location, today);
+        var string = "-";
+        if (sunrise == null || sunset == null) {
+            viewLabel.setText("--");
+            return;
+        }
+        var info;
+        if (now.lessThan(sunrise)) {
+            info = Time.Gregorian.info(sunrise, Time.FORMAT_SHORT);
+            // System.println("next event: sunrise");
+            nextUpdateSunriseSunset = sunrise;
+        } else if (now.greaterThan(sunrise) && now.lessThan(sunset)) {
+            info = Time.Gregorian.info(sunset, Time.FORMAT_SHORT);
+            // System.println("next event: sunset");
+            nextUpdateSunriseSunset = sunset;
+        } else {
+            info = Time.Gregorian.info(sunrise, Time.FORMAT_SHORT);
+            // System.println("next event: sunrise (tomorrow)");
+            var oneDay = new Time.Duration(Gregorian.SECONDS_PER_DAY);
+            var tomorrow = today.add(oneDay);
+            nextUpdateSunriseSunset = Weather.getSunrise(location, tomorrow);
+        }
+        string = Lang.format("$1$:$2$", [
+            info.hour.format("%01u"),
+            info.min.format("%02u")
+        ]);
+        viewLabel.setText(string);
+        // var lastUpdatedLabel = View.findDrawableById("SunriseSunsetLastUpdatedLabel") as Text;
+        // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
         // self.lastUpdatedSunriseSunset = now;
     }
 
