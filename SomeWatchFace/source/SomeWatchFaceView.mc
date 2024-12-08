@@ -10,8 +10,8 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
     const MINUTE = 60;
     const HOUR = self.MINUTE * 60;
 
-    const intervalUpdateFeelsLikeTemp = self.HOUR;
-    var lastUpdatedFeelsLikeTemp;
+    const intervalUpdateDailyPrecipitationChance = self.HOUR * 4;
+    var lastUpdatedDailyPrecipitationChance;
 
     const intervalUpdateDailyLowHighTemp = self.HOUR * 4;
     var lastUpdatedDailyLowHighTemp;
@@ -70,10 +70,10 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
             self.updateDate(clockTime, nowAsMoment);
         }
 
-        // Update feels like temperature.
-        if (self.shouldUpdate(nowAsMoment, lastUpdatedFeelsLikeTemp, intervalUpdateFeelsLikeTemp)) {
-            // System.println("setting feels like temp because reference time was null or because it's time to do so");
-            self.updateFeelsLikeTemp(clockTime, nowAsMoment);
+        // Update daily precipitation chance.
+        if (self.shouldUpdate(nowAsMoment, lastUpdatedDailyPrecipitationChance, intervalUpdateDailyPrecipitationChance)) {
+            // System.println("setting daily low/high temp because reference time was null or because it's time to do so");
+            self.updateDailyPrecipitationChance(clockTime, nowAsMoment);
         }
 
         // Update daily low/high temperature.
@@ -176,25 +176,23 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
         }
     }
 
-    function updateFeelsLikeTemp(clockTime as ClockTime, now as Time.Moment) as Void {
-        var viewFeelsLikeTemp = View.findDrawableById("FeelsLikeTempLabel") as Text;
-        var forecast = Weather.getCurrentConditions();
-        if (forecast == null) {
-            viewFeelsLikeTemp.setText("--");
-            self.lastUpdatedFeelsLikeTemp = new Time.Moment(Time.now().value());
+    function updateDailyPrecipitationChance(clockTime as ClockTime, now as Time.Moment) as Void {
+        var viewLabel = View.findDrawableById("DailyPrecipitationChanceLabel") as Text;
+        var dailyForecast = Weather.getDailyForecast();
+        if (dailyForecast == null) {
+            viewLabel.setText("--");
+            self.lastUpdatedDailyPrecipitationChance = now;
             return;
         }
-        var temperature = forecast.feelsLikeTemperature;
-        if (temperature == null) {
-            viewFeelsLikeTemp.setText("--");
-            self.lastUpdatedFeelsLikeTemp = new Time.Moment(Time.now().value());
+        var dailyPrecipitationChance = dailyForecast[0].precipitationChance;
+        if (dailyPrecipitationChance == null) {
+            viewLabel.setText("--");
+            self.lastUpdatedDailyPrecipitationChance = now;
             return;
         }
-        var temperatureString = Lang.format("$1$°", [temperature]);
-        viewFeelsLikeTemp.setText(temperatureString);
-        // var lastUpdatedLabel = View.findDrawableById("FeelsLikeTempLastUpdatedLabel") as Text;
-        // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
-        self.lastUpdatedFeelsLikeTemp = new Time.Moment(Time.now().value());
+        var dataString = Lang.format("$1$%", [dailyPrecipitationChance]);
+        viewLabel.setText(dataString);
+        self.lastUpdatedDailyPrecipitationChance = now;
     }
 
     function updateDailyLowHighTemp(clockTime as ClockTime, now as Time.Moment) as Void {

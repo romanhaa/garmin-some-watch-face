@@ -1,5 +1,5 @@
 <layout id="WatchFace">
-    <label id="FeelsLikeTempLabel" x="90" y="8" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
+    <label id="DailyPrecipitationChanceLabel" x="90" y="8" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
     <label id="DailyLowHighTempLabel" x="95" y="8" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
     <label id="DateLabel" x="center" y="25" font="Graphics.FONT_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
     <label id="TimeLabel" x="center" y="44" font="@Fonts.robotoMediumFont90" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" />
