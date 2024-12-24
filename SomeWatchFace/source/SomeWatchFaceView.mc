@@ -203,14 +203,16 @@ class SomeWatchFaceView extends WatchUi.WatchFace {
             self.lastUpdatedDailyLowHighTemp = now;
             return;
         }
-        var dailyLowTemp = dailyForecast[0].lowTemperature;
-        var dailyHighTemp = dailyForecast[0].highTemperature;
+        var dailyLowTemp = dailyForecast[0].lowTemperature as Lang.Numeric;
+        var dailyHighTemp = dailyForecast[0].highTemperature as Lang.Numeric;
         if (dailyLowTemp == null || dailyHighTemp == null) {
             viewLabel.setText("--|--");
             self.lastUpdatedDailyLowHighTemp = now;
             return;
         }
-        var dataString = Lang.format("$1$°|$2$°", [dailyLowTemp, dailyHighTemp]);
+        var dailyLowTempAsNumber = dailyLowTemp.toNumber();
+        var dailyHighTempAsNumber = dailyHighTemp.toNumber();
+        var dataString = Lang.format("$1$°|$2$°", [dailyLowTempAsNumber, dailyHighTempAsNumber]);
         viewLabel.setText(dataString);
         // var lastUpdatedLabel = View.findDrawableById("DailyLowHighTempLastUpdatedLabel") as Text;
         // lastUpdatedLabel.setText(Lang.format("$1$:$2$:$3$", [clockTime.hour, clockTime.min.format("%02d"), clockTime.sec.format("%02d")]));
