@@ -1,9 +1,10 @@
 <fonts>
-  <font id="iconFont25" filename="icons-25.fnt" />
-  <font id="iconFont31" filename="icons-31.fnt" />
-  <font id="robotoCondensedMediumFont27" filename="robotoCondensedMedium-27.fnt" />
-  <font id="robotoCondensedMediumFont29" filename="robotoCondensedMedium-29.fnt" />
-  <font id="robotoCondensedMediumFont35" filename="robotoCondensedMedium-35.fnt" />
-  <font id="robotoMediumFont90" filename="robotoMedium-90.fnt" />
-  <font id="robotoMediumFont110" filename="robotoMedium-110.fnt" />
+  <font id="iconFont25" filename="icons-25.fnt" antialias="true" />
+  <font id="iconFont31" filename="icons-31.fnt" antialias="true" />
+  <font id="robotoCondensedMediumFont27" filename="robotoCondensedMedium-27.fnt" antialias="true" />
+  <font id="robotoCondensedMediumFont29" filename="robotoCondensedMedium-29.fnt" antialias="true" />
+  <font id="robotoCondensedMediumFont35" filename="robotoCondensedMedium-35.fnt" antialias="true" />
+  <font id="robotoMediumFont90" filename="robotoMedium-90.fnt" antialias="true" />
+  <font id="robotoMediumFont110" filename="robotoMedium-110.fnt" antialias="true" />
+  <font id="weatherFont25" filename="weather-27.fnt" antialias="true" />
 </fonts>
